@@ -1,0 +1,17 @@
+
+ul.tree li {
+    list-style-type: disc;
+    margin-left: 2em;  
+}
+
+.hidden {
+    display: none;
+}
+
+.controls {
+    display: none;    
+}
+
+a:hover {
+    background-color: #ddd;
+}

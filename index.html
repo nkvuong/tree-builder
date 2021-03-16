@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Creating a directory tree</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/tree.js"></script>
+</head>
+
+<body>
+    <h1>Create dir tree</h1>
+    <div>
+        <input id="p_name" value="Project Name" />
+    </div>
+    <div>
+        <ul id='tree' class='tree'></ul>
+    </div>
+
+    <hr />
+    <div>
+        <p>Output:</p><br />
+        <pre id='out' cols='50' rows='20'></pre>
+    </div>
+
+    <div class='hidden' id='template'>
+        <ul>
+            <li class='tree-node'><input value='filename' />
+                <span class='controls'>
+                    &raquo;
+                    <a href='#' data-func='add-sibling'>+sibling</a> |
+                    <a href='#' data-func='add-child'>+child</a> |
+                    <a href='#' data-func='delete'>delete</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
