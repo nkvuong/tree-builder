@@ -3,9 +3,8 @@ $(document).ready(function () {
         prefix_last = "`-- ",
         spacer = "|   ",
         spacer_e = "    ",
-        ul_template = $('#template > ul'),
-        li_template = $('li', ul_template).first();
-
+        ul_template = $("#template > ul"),
+        li_template = $("li", ul_template).first();
 
     var action = {
         "add-sibling": function (obj) {
@@ -14,11 +13,13 @@ $(document).ready(function () {
         "add-child": function (obj) {
             obj.append(ul_template.clone());
         },
-        "delete": function (obj) { obj.remove(); }
+        delete: function (obj) {
+            obj.remove();
+        },
     };
 
-    $(document).on('click', 'li.tree-node .controls > a', function () {
-        action[this.getAttribute('data-func')]($(this).closest('li'));
+    $(document).on("click", "li.tree-node .controls > a", function () {
+        action[this.getAttribute("data-func")]($(this).closest("li"));
         rebuild_tree();
         return false;
     });
@@ -31,35 +32,39 @@ $(document).ready(function () {
 
         items.each(function (index) {
             var $this = $(this);
-            out += padding
-                + ((index == last) ? prefix_last : prefix)
-                + $this.children("input").val() + "\n";
+            out +=
+                padding +
+                (index == last ? prefix_last : prefix) +
+                $this.children("input").val() +
+                "\n";
             var subdirs = $this.children("ul");
             if (subdirs.length) {
-
-                out += get_subdir_text(subdirs,
-                    padding + ((index == last) ? spacer_e : spacer));
+                out += get_subdir_text(
+                    subdirs,
+                    padding + (index == last ? spacer_e : spacer)
+                );
             }
         });
         return out;
     }
 
     function rebuild_tree() {
-        $('#out').text($('#p_name').val()
-            + "\n"
-            + get_subdir_text($('#tree')));
+        $("#out").text($("#p_name").val() + "\n" + get_subdir_text($("#tree")));
     }
 
-    $('#tree').append(li_template.clone());
-    $(document).on('keyup', '#tree input', rebuild_tree);
-    $('#p_name').on('keyup', rebuild_tree);
+    $("#tree").append(li_template.clone());
+    $(document).on("keyup", "#tree input", rebuild_tree);
+    $("#p_name").on("keyup", rebuild_tree);
 
-    $('#tree').on('mouseover', 'li', function (e) {
-        $(this).children('.controls').show();
-        e.stopPropagation();
-    }).on('mouseout', 'li', function (e) {
-        $(this).children('.controls').hide();
-        e.stopPropagation();
-    });
+    $("#tree")
+        .on("mouseover", "li", function (e) {
+            $(this).children(".controls").show();
+            e.stopPropagation();
+        })
+        .on("mouseout", "li", function (e) {
+            $(this).children(".controls").hide();
+            e.stopPropagation();
+        });
+        
     rebuild_tree();
 });
