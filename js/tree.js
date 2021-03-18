@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var prefix = "|-- ",
+    const prefix = "|-- ",
         prefix_last = "`-- ",
         spacer = "|   ",
         spacer_e = "    ",
         ul_template = $("#template > ul"),
         li_template = $("li", ul_template).first();
 
-    var action = {
+    const action = {
         "add-sibling": function (obj) {
             obj.after(li_template.clone());
         },
@@ -25,19 +25,19 @@ $(document).ready(function () {
     });
 
     function get_subdir_text(obj, pad) {
-        var padding = pad || "",
+        let padding = pad || "",
             out = "",
             items = obj.children("li"),
             last = items.length - 1;
 
         items.each(function (index) {
-            var $this = $(this);
+            const $this = $(this);
             out +=
                 padding +
                 (index == last ? prefix_last : prefix) +
                 $this.children("input").val() +
                 "\n";
-            var subdirs = $this.children("ul");
+            const subdirs = $this.children("ul");
             if (subdirs.length) {
                 out += get_subdir_text(
                     subdirs,
@@ -65,6 +65,6 @@ $(document).ready(function () {
             $(this).children(".controls").hide();
             e.stopPropagation();
         });
-        
+
     rebuild_tree();
 });
